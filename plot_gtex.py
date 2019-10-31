@@ -5,13 +5,16 @@ import os
 import argparse
 import time
 
+
 def initialize():
     """
     An initializing function
     """
 
     parser = argparse.ArgumentParser(
-        description='This code plots the gene expression distribution across either tissue groups (SMTS), or tissue types (SMTSD) for a target gene')
+        description='This code plots the gene expression distribution across \
+                    either tissue groups (SMTS), or tissue types (SMTSD) for \
+                    a target gene')
     parser.add_argument('--output_file',
                         type=str,
                         help='The file name of the output file (figure)',
@@ -131,12 +134,7 @@ def main():
             rna_header_plus_index = []
             for i in range(len(rna_header)):
                 rna_header_plus_index.append([rna_header[i], i])
-            
-            # Benchmarking
-            # start = time.time()
             rna_header_plus_index.sort()
-            # end = time.time()
-            # print(end - start)
             continue
 
         rna_counts = l.rstrip().split('\t')
@@ -150,14 +148,14 @@ def main():
             attrs = list(set(target_group))
             attrs.sort()
             par_array = []
-            # search_start = time.time()
+            search_start = time.time()
             for attr in attrs:
                 attr_idxs = linear_search_all_hits(attr, target_group)
 
                 attr_counts = []
                 for attr_idx in attr_idxs:
                     rna_header_idx = linear_search(samples[attr_idx],
-                                                    rna_header)
+                                                   rna_header)
                     # rna_header_idx = binary_search(samples[attr_idx],
                     #                                rna_header_plus_index)
                     if rna_header_idx == -1:
@@ -168,11 +166,9 @@ def main():
             data_viz.boxplot(par_array, attrs, args.group_type,
                              'Gene read counts', target_gene_name,
                              args.output_file)
-            # search_end = time.time()
-            # print(search_end - search_start)
-            sys.exit(0)
+            search_end = time.time()
+            print(search_end - search_start)
 
-    sys.exit(0)
 
 if __name__ == '__main__':
     main()

@@ -1,6 +1,7 @@
 import unittest
 import plot_gtex
 
+
 class TestSearchingMethods(unittest.TestCase):
     def test_linear_search(self):
         L = [1, 2, 3, 4, 5]
@@ -28,6 +29,7 @@ class TestSearchingMethods(unittest.TestCase):
 
         r = plot_gtex.binary_search(100, L)
         self.assertEqual(r, -1)
+
 
 if __name__ == '__main__':
     unittest.main()
