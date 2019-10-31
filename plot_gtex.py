@@ -79,6 +79,7 @@ def binary_search(key, D):
 
     return -1
 
+
 def main():
     args = initialize()
 
@@ -155,10 +156,10 @@ def main():
 
                 attr_counts = []
                 for attr_idx in attr_idxs:
-                    # rna_header_idx = linear_search(samples[attr_idx],
-                    #                                rna_header)
-                    rna_header_idx = binary_search(samples[attr_idx],
-                                                   rna_header_plus_index)
+                    rna_header_idx = linear_search(samples[attr_idx],
+                                                    rna_header)
+                    # rna_header_idx = binary_search(samples[attr_idx],
+                    #                                rna_header_plus_index)
                     if rna_header_idx == -1:
                         continue
                     count = rna_counts[rna_header_idx]
