@@ -109,11 +109,11 @@ def main():
         sample_idx = linear_search('SAMPID', metadata_header)
         target_idx = linear_search(args.group_type, metadata_header)
         if (target_idx == -1):
-            return [], []
+            break
         samples.append(sample_info[sample_idx])
         target_group.append(sample_info[target_idx])
 
-    if not target_group:
+    if len(target_group) == 0:
         print('Group type not found')
         sys.exit(1)
 
@@ -148,7 +148,7 @@ def main():
             attrs = list(set(target_group))
             attrs.sort()
             par_array = []
-            search_start = time.time()
+            # search_start = time.time()
             for attr in attrs:
                 attr_idxs = linear_search_all_hits(attr, target_group)
 
@@ -163,11 +163,14 @@ def main():
                     count = rna_counts[rna_header_idx]
                     attr_counts.append(int(count))
                 par_array.append(attr_counts)
-            data_viz.boxplot(par_array, attrs, args.group_type,
+            data_viz.boxplot(par_array, target_group, args.group_type,
                              'Gene read counts', target_gene_name,
                              args.output_file)
-            search_end = time.time()
-            print(search_end - search_start)
+            # search_end = time.time()
+            # print(search_end - search_start)
+            sys.exit(0)
+
+    sys.exit(0)
 
 
 if __name__ == '__main__':
