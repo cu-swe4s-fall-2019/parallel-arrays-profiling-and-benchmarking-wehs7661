@@ -1,5 +1,5 @@
 # Parallel Arrays, Profiling, and Benchmarking
-
+[![Build Status](https://travis-ci.com/cu-swe4s-fall-2019/parallel-arrays-profiling-and-benchmarking-wehs7661.svg?branch=master)](https://travis-ci.com/cu-swe4s-fall-2019/parallel-arrays-profiling-and-benchmarking-wehs7661)
 ## Description
 This is a repository for Assignment 4 of the course Software Engineering for Scientise (CSCI7000) at CU Boulder, which includes the following files:
 - `plot_gtex.py`: the code used for ploting the gene expression distribution across either tissue groups (SMTS), or tissue types (SMTSD) for a target gene
