@@ -5,7 +5,27 @@ from matplotlib import rc
 
 
 def boxplot(data, meta, x_label, y_label, title, out_file):
-    """plot boxplot for input parallel array and save the result as a png file
+    """
+    This function generate a series of boxplots and save it as a png file
+
+    Parameters
+    ----------
+    data : str
+        the file containing the data to be plotted
+    meta : str
+        the file name of the meta data
+    x_label : str
+        the label of the x axis
+    y_label : str
+        the lable of the y axis
+    title : str
+        the title of the boxplot
+    out_file : str
+        the filename of the png file to be output
+
+    Returns
+    -------
+    None
     """
     # settings for plotting
     rc('font', **{

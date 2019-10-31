@@ -1,10 +1,5 @@
 # Parallel Arrays, Profiling, and Benchmarking
 
-Files:
-- https://github.com/swe4s/lectures/blob/master/data_integration/gtex/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_reads.acmg_59.gct.gz?raw=true
-- https://storage.googleapis.com/gtex_analysis_v8/annotations/GTEx_Analysis_v8_Annotations_SampleAttributesDS.txt
-
-
 ## Description
 This is a repository for Assignment 4 of the course Software Engineering for Scientise (CSCI7000) at CU Boulder, which includes the following files:
 - `plot_gtex.py`: the code used for ploting the gene expression distribution across either tissue groups (SMTS), or tissue types (SMTSD) for a target gene

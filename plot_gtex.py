@@ -9,6 +9,15 @@ import time
 def initialize():
     """
     An initializing function
+
+    Parameters
+    ----------
+    No parameters required
+
+    Return
+    ------
+    args_parse : namespace
+        a namespace containing the argument parser
     """
 
     parser = argparse.ArgumentParser(
@@ -46,7 +55,22 @@ def initialize():
 
 
 def linear_search(key, L):
-    """ Returns index with matched key using a linear searching method
+    """
+    This function returns index with matched key using a linear searching
+    method
+
+    Parameters
+    ----------
+    key : str or int or float
+        the key for finding the associated value
+    L : list
+        the dataset in which the key to be searched for
+
+    Returns
+    -------
+    i : int
+        the index of the given key (If no key is found, the function
+        returns -1.)
     """
     for i in range(len(L)):
         if key == L[i]:
@@ -55,7 +79,21 @@ def linear_search(key, L):
 
 
 def linear_search_all_hits(key, L):
-    """ Gives indices not values
+    """
+    This function returns a list of index with matched key using a linear
+    searching method
+
+    Parameters
+    ----------
+    key : str or int or float
+        the key for finding the associated values
+    L : list
+        the dataset in which the key to be searched for
+
+    Returns
+    -------
+    hit : list
+        a list of index of the given key
     """
     hit = []
     for i in range(len(L)):
@@ -65,7 +103,22 @@ def linear_search_all_hits(key, L):
 
 
 def binary_search(key, D):
-    """ Returns index with matched key using a binary searching method
+    """
+    This function returns index with matched key using a binary searching
+    method
+
+    Parameters
+    ----------
+    key : str or int or float
+        the key for finding the associated value
+    D : list
+        the dataset in which the key to be searched for
+
+    Returns
+    -------
+    D[mid][1] : int
+        the index of the given key (If no key is found, the function
+        returns -1.)
     """
     lo = -1
     hi = len(D)
