@@ -12,3 +12,7 @@ before_install:
     - conda install --yes python=3.6
       
 script:
+    - python test_data_viz.py
+    - python test_plot_gtex.py
+    - bash test_plot_gtex.sh
+
