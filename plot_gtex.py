@@ -4,9 +4,9 @@ import sys
 import os
 import argparse
 import time
-sys.path.insert(1, 'hash-tables-wehs7661')
-import hash_functions
+sys.path.insert(1, 'hash-tables-wehs7661')  # noqa: E402
 import hash_tables
+import hash_functions
 
 
 def initialize():
@@ -53,8 +53,9 @@ def initialize():
                         required=True)
     parser.add_argument('--data_structure',
                         type=str,
-                        help='The type of data structure. Available options are \
-                            "parallel" (parallel array) and "hash" (hash table)',
+                        help='The type of data structure. Available options \
+                            are "parallel" (parallel array) and "hash" \
+                            (hash table)',
                         required=True)
 
     args_parse = parser.parse_args()
@@ -185,10 +186,10 @@ def main():
             target_group.append(sample_info[target_idx])  # group type
         elif args.data_structure == 'hash':
             key = sample_info[target_idx]                 # group type
-            value = sample_info[sample_idx]               # ID 
+            value = sample_info[sample_idx]               # ID
             search = ht_meta.search(key)
             if search is None:
-                ht_meta.add(key, [value]) # map ID and group
+                ht_meta.add(key, [value])  # map ID and group
                 target_group.append(key)
             else:
                 search.append(value)
@@ -236,7 +237,7 @@ def main():
                     attr_counts = []
                     for attr_idx in attr_idxs:
                         rna_header_idx = linear_search(samples[attr_idx],
-                                                    rna_header)
+                                                       rna_header)
                         # rna_header_idx = binary_search(samples[attr_idx],
                         #                                rna_header_plus_index)
                         if rna_header_idx == -1:
@@ -245,17 +246,19 @@ def main():
                         attr_counts.append(int(count))
                     par_array.append(attr_counts)
                 data_viz.boxplot(par_array, target_group, args.group_type,
-                                'Gene read counts', target_gene_name,
-                                args.output_file)
+                                 'Gene read counts', target_gene_name,
+                                 args.output_file)
                 # search_end = time.time()
                 # print(search_end - search_start)
                 sys.exit(0)
-            
+
             elif args.data_structure == 'hash':
                 counts_list = []
-                ht_rna = hash_tables.ChainedHash(100000, hash_functions.h_rolling)
+                ht_rna = hash_tables.ChainedHash(
+                    100000, hash_functions.h_rolling)
                 for i in range(description_idx + 1, len(rna_header)):
-                    ht_rna.add(rna_header[i], int(rna_counts[i]))  # map ID and counts
+                    # map ID and counts
+                    ht_rna.add(rna_header[i], int(rna_counts[i]))
                 target_group.sort()
                 for attr in target_group:
                     attr_counts = []
@@ -269,10 +272,11 @@ def main():
                         attr_counts.append(count)
                     counts_list.append(attr_counts)
                 data_viz.boxplot(counts_list, target_group, args.group_type,
-                                'Gene read counts', target_gene_name,
-                                args.output_file)
+                                 'Gene read counts', target_gene_name,
+                                 args.output_file)
                 sys.exit(0)
     sys.exit(0)
+
 
 if __name__ == '__main__':
     main()
