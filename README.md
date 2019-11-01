@@ -52,7 +52,7 @@ python -m cProfile -s tottime plot_gtex.py --gene_reads  GTEx_Analysis_2017-06-0
 As a result, it took 18.940 seconds for the program to complete the task, in which the function `linear_search` accounts for 14.527 seconds (76.846%). Therefore, to enhance the performance of the main program, starting with improving the searching method would be the most reasonable choice, which is the motivation of the development of another seaerching method: `binary_search`. Replacing the searching method with the function `binary_search` and performing profiling again, from the results documented in `plot_gtex.binary_search.txt`, we can see that the time required to generate the boxplots was significantly reduced to 1.623 seconds, in which the searching of the data accounts for a very small amount of time. This is how we can identify the part of the code which has biggest room for improvments and improve it accordingly using the concept of profiling.
 
 ### Benchmarking
-To test the resources used by the program, we also performed benchinmarking, using either the GNU `time` program or the Python module `time`.
+To test the resources used by the program, we also replaced linear search method with binary search method and performed benchinmarking, using either the GNU `time` program or the Python module `time` to compare.
 
 #### GNU `time` program 
 - Parallel arrays with linear searching method (`linear_search`)
@@ -69,20 +69,23 @@ To test the resources used by the program, we also performed benchinmarking, usi
     - Elapsed time: 0.61 seconds
     - Maximum memory usage: 61660 KB
 
-- Hash tables
+- Hash tables with linear searching method (`linear search`)
   -Command
   ```
   /usr/bin/time -f '%e\t%M' python plot_gtex.py --gene_reads  GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_reads.acmg_59.gct.gz --sample_attributes GTEx_Analysis_v8_Annotations_SampleAttributesDS.txt --gene ACTA2 --group_type SMTS --output_file ACTA2.png --data_structure hash
   ```
   - Result
-    - Elapsed time: 0.58 seconds
-    - Maximum memory usage: 61636 KB
+    - Elapsed time: 2.15 seconds
+    - Maximum memory usage: 97260 KB
+
+- Hash tables with binary searching method (`binary search`)
+  -Command: same as the one used in above
+  - Result
+    - Elapsed time: 0.07 seconds
+    - Maximum memory usage: 6700 KB
 
 - Discussion 
-As shown above, for the parallel arrays, the binary search method is significantly faster than the linear search method while at the same time, takes less memory space, which validates that the binary method is apparently better than the linear method. On the other hand, comparing hash tables to parallels, we can see that the hash table is also much faster than the parllel arrays with the linear method. It is also slightly faster than the binary method, but is basically at the same order of magnitude as the parallel arrays with binary method. (Also, they take up about the same amount of memory space.) From this result, we can tell that hash table is generally a better data structure than the parallel arrays, especially when the searching method used in parllel arrays is not good enough. 
-
-### Python module `time`
-In this section, the part of searching data in the `main` function was timed by the Python module `time`. As a result, it took about 17.008 and 0.984 seconds for the program to run through the whole searching loop, for the lienar and binary searching method, respectively. This again, shows that the binary searching method is superior to the linear searching method.
+As shown above, for both parallel arrays and hash tables, the binary search method is significantly faster than the linear search method while at the same time, takes less memory space, which validates that the binary method is apparently better than the linear method. On the other hand, for the same searching method, either the linear method or the binary method, we can see that the hash tables are much faster than the parallel array. For the linear search method, the hash table version takes slight more memory space than the parallel arrays, which is probably attributable to the large dimension of the hash tables. However, we can still see that generally, hash table is a better data structure than parallel arrays. 
 
 ## Changes made upon the starter code of Assignment 4
 - Developed the main program `plot_gtex.py`, the code used for ploting the gene expression distribution across either tissue groups (SMTS), or tissue types (SMTSD) for a target gene.
@@ -94,3 +97,10 @@ In this section, the part of searching data in the `main` function was timed by 
 - Made sure that all the Python codes conform with the best practices, including docstring and PEP8 coding style.
 - Edited `.travis.yml` to pass the continuous integration performed by TravisCI.
 
+## Changes made upon the starter code (Assignment 4) of Assignment 8
+- Add the submodule `hash-tables-wehs7661 @ 44470e5` from `hash-tables-wehs7661` to the repository.
+- Modified `hash_tables.py` to make it able to store the set of keys stored in the hash table.
+- Enabled the option to choose hash tables (rolling hash functino and chained hashed strategy) in `plot_gtex.py` and modified the argument parser accordingly.
+- Performed benchmarking and profiling on the main program with hash tables chosen and updated README accordingly.
+- Performed benchmarking on the main program and updated `README` accordingly.
+- Modified functional test `test_plot_gtex.sh` and `.travis.yml` to pass the continuous integration performed by TravisCI.
