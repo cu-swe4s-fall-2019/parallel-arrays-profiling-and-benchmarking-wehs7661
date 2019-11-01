@@ -51,10 +51,9 @@ python -m cProfile -s tottime plot_gtex.py --gene_reads  GTEx_Analysis_2017-06-0
 ```
 As a result, it took 18.940 seconds for the program to complete the task, in which the function `linear_search` accounts for 14.527 seconds (76.846%). Therefore, to enhance the performance of the main program, starting with improving the searching method would be the most reasonable choice, which is the motivation of the development of another seaerching method: `binary_search`. Replacing the searching method with the function `binary_search` and performing profiling again, from the results documented in `plot_gtex.binary_search.txt`, we can see that the time required to generate the boxplots was significantly reduced to 1.623 seconds, in which the searching of the data accounts for a very small amount of time. This is how we can identify the part of the code which has biggest room for improvments and improve it accordingly using the concept of profiling.
 
-### Benchmarking
-To test the resources used by the program, we also replaced linear search method with binary search method and performed benchinmarking, using either the GNU `time` program or the Python module `time` to compare.
+### 2. Benchmarking using GNU `time`
+To test the resources used by the program, we also replaced linear search method with binary search method and performed benchinmarking using GNU `time`.
 
-#### GNU `time` program 
 - Parallel arrays with linear searching method (`linear_search`)
   - Command
   ```
@@ -79,12 +78,12 @@ To test the resources used by the program, we also replaced linear search method
     - Maximum memory usage: 97260 KB
 
 - Hash tables with binary searching method (`binary search`)
-  -Command: same as the one used in above
+  - Command: same as the one used in above
   - Result
     - Elapsed time: 0.07 seconds
     - Maximum memory usage: 6700 KB
 
-- Discussion 
+- Discussion <br/>
 As shown above, for both parallel arrays and hash tables, the binary search method is significantly faster than the linear search method while at the same time, takes less memory space, which validates that the binary method is apparently better than the linear method. On the other hand, for the same searching method, either the linear method or the binary method, we can see that the hash tables are much faster than the parallel array. For the linear search method, the hash table version takes slight more memory space than the parallel arrays, which is probably attributable to the large dimension of the hash tables. However, we can still see that generally, hash table is a better data structure than parallel arrays. 
 
 ## Changes made upon the starter code of Assignment 4
